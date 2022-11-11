@@ -39,5 +39,15 @@ public class ConfirmationInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String clientName = (String) req.getSession().getAttribute("clientName");
         String clientAddress = (String) req.getSession().getAttribute("clientAddress");
+        //String color = (String) req.getSession().getAttribute("color");
+        String color=req.getParameter("color");
+        //String color= (String) req.getSession().getAttribute("color");
+        req.getSession().setAttribute("color",color);
+        String size = (String) req.getSession().getAttribute("size");
+        //Order order = orderService.placeOrder(color, size, clientName, clientAddress);//ova go chuvame vo sesija; ova go trgnav
+        //String orders=req.getParameter("order");
+       // req.getSession().setAttribute("order",order); //ova go trgnav
+
+
     }
 }

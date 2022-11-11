@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Order</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px 2px;
+        }
+    </style>
+</head>
+<body>
+<table class="wp-table">
+    <tr>
+        <th>Balloon Color</th>
+        <th>Balloon Size</th>
+        <th>Client Name</th>
+        <th>Client Address</th>
+    </tr>
+    <!--<tr th:each="order : ${orders}">-->
+    <tr th:each=" order : ${orders}">
+        <td th:text="${order.getBalloonColor()}"></td>
+        <td th:text="${order.getBalloonSize()}"></td>
+        <td th:text="${order.clientName}"></td>
+        <td th:text="${order.clientAddress}"></td>
+
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add balloon</title>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <form action="/balloons/add" method="POST">
+            <div class="form-group">
+                <label for="color">Balloon name</label>
+                <input type="text"
+                        id="color"
+                        name="color"
+                        th:value="(${balloon} !=null ? ${balloon.getName()} : '')"
+                        required
+                        placeholder="Enter product name">
+
+            </div>
+            <div class="form-group">
+                <label for="desc">Description</label>
+                <input type="text"
+                       class="form-control"
+                       id="desc"
+                       name="desc"
+                       th:value="(${balloon} != null ? ${balloon.getDescription()} : '')"
+                       placeholder="Description">
+            </div>
+            <div class="form-group">
+                <label>Manufacturer</label>
+                <select name="manufacturer" class="form-control">
+                    <option th:if="${balloon} != null"
+                            th:selected="${balloon.getManufacturer() != null && balloon.getManufacturer().getId() == man.getId()}"
+                            th:each="man : ${manufacturers}"
+                            th:value="${man.getId()}"
+                            th:text="${man.getName()}">
+                    </option>
+                    <option th:if="${balloons} == null"
+                            th:each="man : ${manufacturers}"
+                            th:value="${man.getId()}"
+                            th:text="${man.getName()}">
+                    </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a type="button" class="btn btn-primary" href="/balloons">Back</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

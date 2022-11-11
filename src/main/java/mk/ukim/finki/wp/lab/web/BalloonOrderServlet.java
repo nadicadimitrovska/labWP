@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.lab.web;
 
-import mk.ukim.finki.wp.lab.model.Balloon;
 import mk.ukim.finki.wp.lab.model.Order;
 import mk.ukim.finki.wp.lab.service.BalloonService;
 import mk.ukim.finki.wp.lab.service.OrderService;
@@ -13,22 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.security.InvalidParameterException;
 
 @WebServlet(name = "BalloonOrder", urlPatterns = "/BalloonOrder.do")
 public class BalloonOrderServlet extends HttpServlet {
     private final SpringTemplateEngine springTemplateEngine;
-    //private final OrderService orderService;
-    private final BalloonService balloonService;
-//    public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine, OrderService orderService, BalloonService balloonService) {
+    private final OrderService orderService;
+
+    //    public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine, OrderService orderService, BalloonService balloonService) {
 //        this.springTemplateEngine = springTemplateEngine;
 //        this.orderService = orderService;
 //        this.balloonService=balloonService;
 //    }
-    public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine, BalloonService balloonService) {
+    public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine, OrderService orderService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.balloonService = balloonService;
+        this.orderService = orderService;
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,7 +38,8 @@ public class BalloonOrderServlet extends HttpServlet {
         String color= (String) req.getSession().getAttribute("color");
         String size= (String) req.getSession().getAttribute("size");
         String clientAddress =req.getParameter("clientAddress");
-        Order order=new Order(color,size,clientName,clientAddress);
+        //Order order=new Order(color,size,clientName,clientAddress);
+        Order order=orderService.placeOrder(color,size,clientName,clientAddress);
         req.getSession().setAttribute("order",order);
         req.getSession().setAttribute("ipAddress",req.getRemoteAddr());
         req.getSession().setAttribute("clientAgent",req.getHeader("User-Agent"));
