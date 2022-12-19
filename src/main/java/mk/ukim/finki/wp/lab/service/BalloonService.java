@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface BalloonService {
     List<Balloon>listAll();
-    List<Balloon>searchByNameOrDescription(String text);
+    List<Balloon> searchByNameOrDescription(String text,String desc);//dodadeno vo lab3
     Optional<Balloon>findById(Long id);
     Optional<Balloon>save(String name, String description, Long manufacturerId);
 

@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.lab.web;
 
 import mk.ukim.finki.wp.lab.model.Order;
+import mk.ukim.finki.wp.lab.model.User;
 import mk.ukim.finki.wp.lab.service.BalloonService;
 import mk.ukim.finki.wp.lab.service.OrderService;
 import org.thymeleaf.context.WebContext;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "BalloonOrder", urlPatterns = "/BalloonOrder.do")
 public class BalloonOrderServlet extends HttpServlet {
@@ -38,8 +40,13 @@ public class BalloonOrderServlet extends HttpServlet {
         String color= (String) req.getSession().getAttribute("color");
         String size= (String) req.getSession().getAttribute("size");
         String clientAddress =req.getParameter("clientAddress");
+        //String username = (String) req.getSession().getAttribute("username");
+        User user = (User) req.getSession().getAttribute("user");
+        String dateCreated = (String) req.getSession().getAttribute("dateCreated");
         //Order order=new Order(color,size,clientName,clientAddress);
-        Order order=orderService.placeOrder(color,size,clientName,clientAddress);
+        //Order order=orderService.placeOrder(color,size,clientName,clientAddress);//lab2
+
+        Order order=orderService.placeOrder(color,size,user.getUsername(), LocalDateTime.parse(dateCreated));
         req.getSession().setAttribute("order",order);
         req.getSession().setAttribute("ipAddress",req.getRemoteAddr());
         req.getSession().setAttribute("clientAgent",req.getHeader("User-Agent"));

@@ -29,11 +29,11 @@
         </tr>
         <tr>
             <td><b>Client Name </b></td>
-            <td th:text="${session.order.clientName}"></td> <!--Petko Petkov -->
+            <td th:text="${session.user.username}"></td> <!--Petko Petkov -->
         </tr>
         <tr>
-            <td><b>Client Address </b></td>
-            <td th:text="${session.order.clientAddress}"></td> <!--Partizanska 5, Skopje -->
+            <!--<td><b>Client Address </b></td>
+            <td th:text="${session.order.clientAddress}"></td>Partizanska 5, Skopje -->
         </tr>
         <tr>
             <td><b>Client IP Address</b></td>
@@ -51,7 +51,20 @@
             <td><b>Balloon Size </b></td>
              <td th:text="${session.size}"></td>  <!--Large-->
         </tr>
+<!--        <tr>-->
+<!--            <td><b>Username </b></td>-->
+<!--            <td th:text="${session.user.username}"></td>  &lt;!&ndash;Large&ndash;&gt;-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><b>Date Create </b></td>-->
+<!--            <td th:text="${session.order.dateCreated}"></td>  &lt;!&ndash;Large&ndash;&gt;-->
+<!--        </tr>-->
+
     </table>
+<!--    <div>-->
+<!--        <label for="dateCreated">Created on</label>-->
+<!--        <input type="datetime-local"  id="dateCreated" placeholder="Date Createdh" name="dateCrated" required=""/>-->
+<!--    </div>-->
     <div>
         <a href="/balloons">Log out</a>
     </div>

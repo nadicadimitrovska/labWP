@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "Confirm", urlPatterns = "/ConfirmationInfo")
 public class ConfirmationInfoServlet extends HttpServlet {
@@ -47,6 +48,11 @@ public class ConfirmationInfoServlet extends HttpServlet {
         //Order order = orderService.placeOrder(color, size, clientName, clientAddress);//ova go chuvame vo sesija; ova go trgnav
         //String orders=req.getParameter("order");
        // req.getSession().setAttribute("order",order); //ova go trgnav
+        //za lab3
+//        String username= (String) req.getSession().getAttribute("username");
+//        LocalDateTime dateCreated= (LocalDateTime) req.getSession().getAttribute("dateCreated");
+//        Order order=orderService.placeOrder(color,size,username,dateCreated);
+//        req.getSession().setAttribute("order",order);
 
 
     }

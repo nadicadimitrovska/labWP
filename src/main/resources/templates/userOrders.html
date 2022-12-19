@@ -7,9 +7,11 @@
             width: 800px;
             margin: auto;
         }
+
         table {
-            width:100%;
+            width: 100%;
         }
+
         table, td, th {
             border: 1px solid black;
             padding: 3px 2px;
@@ -17,22 +19,67 @@
     </style>
 </head>
 <body>
+<!--
 <table class="wp-table">
     <tr>
         <th>Balloon Color</th>
         <th>Balloon Size</th>
-        <th>Client Name</th>
-        <th>Client Address</th>
-    </tr>
-    <!--<tr th:each="order : ${orders}">-->
-    <tr th:each=" order : ${orders}">
-        <td th:text="${order.getBalloonColor()}"></td>
-        <td th:text="${order.getBalloonSize()}"></td>
-        <td th:text="${order.clientName}"></td>
-        <td th:text="${order.clientAddress}"></td>
+        <th>Client Name</th>-->
+<!--<th>Client Address</th>-->
+<!-- </tr>-->
+<!--<tr th:each="order : ${orders}">-->
+<!--<tr th:each=" order : ${orders}">-->
+<!-- <td th:text="${order.getBalloonColor()}"></td>-->
+<!--<td th:text="${order.getBalloonSize()}"></td>-->
+<!--<td th:text="${order.clientName}"></td>-->
+<!--<td th:text="${order.clientAddress}"></td>
+
+</tr>
+
+</table> -->
+<!--
+<h1>
+    Orders that were made by:
+    <th:block th:text="${username}"></th:block>
+</h1>
+<div th:if="${listofOrders}!=null">
+    <div th:each="order : ${listofOrders}">
+        <span th:text="${order.getBalloonColor()}"></span>
+        <span th:text="${order.getBalloonSize()}"></span>
+        <span th:text="${order.getDateCreated()}"></span>
+        <span th:text="${order.getUser().username}"></span>
+    </div>
+
+</div> -->
+
+<p>
+<h1 th:text="${session.user.getUserFullname().getName()}"></h1>
+</p>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Balloon color</th>
+        <th scope="col">Balloon Size</th>
+        <th scope="col">Date Created</th>
 
     </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.getBalloonColor()}"></td>
+        <td th:text="${order.getBalloonSize()}"></td>
+        <td th:text="${order.getDateCreated()}"></td>
+
+
+    </tr>
+    </tbody>
 </table>
+
+<form method="get" action="/orders">
+   From: <input type="datetime-local" id="dateFrom" placeholder="dateFrom" name="dateFrom" required=""/> <br/>
+    To: <input type="datetime-local" id="dateTo" placeholder="dateTo" name="dateTo" required=""/>
+    <input type="submit" value="Submit"/>
+</form>
 
 </body>
 </html>

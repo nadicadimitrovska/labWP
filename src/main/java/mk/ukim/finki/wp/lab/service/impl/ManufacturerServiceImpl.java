@@ -1,7 +1,7 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Manufacturer;
-import mk.ukim.finki.wp.lab.repository.ManufacturerRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ManufacturerRepositoryDB;
 import mk.ukim.finki.wp.lab.service.ManufacturerService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,14 @@ import java.util.List;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
 
-    private final ManufacturerRepository manufacturerRepository;
+//    private final ManufacturerRepository manufacturerRepository;
+//
+//    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
+//        this.manufacturerRepository = manufacturerRepository;
+//    }
+    private final ManufacturerRepositoryDB manufacturerRepository;
 
-    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
+    public ManufacturerServiceImpl(ManufacturerRepositoryDB manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
     }
 
