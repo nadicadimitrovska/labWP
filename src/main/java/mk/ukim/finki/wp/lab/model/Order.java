@@ -37,6 +37,9 @@ public class Order {
     public Order() {
 
     }
+    public Order(User user){
+        this.user=user;
+    }
 //    public Order(String balloonColor, String balloonSize, String clientName, String clientAddress, Long orderId) {
 //        this.balloonColor = balloonColor;
 //        this.balloonSize = balloonSize;

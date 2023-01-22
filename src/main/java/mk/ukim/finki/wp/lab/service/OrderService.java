@@ -14,5 +14,6 @@ public interface OrderService {
     List<Order> findByUsername(String username);
     Optional<Order>findById(Long id);
     List<Order>findAllOrdersByDateBetween(LocalDateTime dateFrom, LocalDateTime dateTo);
+    Order getActiveOrder(String username);
 
 }

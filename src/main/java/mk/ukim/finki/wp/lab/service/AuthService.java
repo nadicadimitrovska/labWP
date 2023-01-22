@@ -10,6 +10,6 @@ public interface AuthService {
     User login(String username, String password);
 
 
-    User register(String username, String password, String repeatPassword,
-                  UserFullname userFullname, LocalDate dateOfBirth);
+//    User register(String username, String password, String repeatPassword,
+//                  UserFullname userFullname, LocalDate dateOfBirth);
 }

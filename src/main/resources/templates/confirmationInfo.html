@@ -1,22 +1,22 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <title>WP lab - Confirmation Info</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-        table {
-            width:100%;
-        }
-        table, td, th {
-            border: 1px solid black;
-            padding: 3px 2px;
-        }
-    </style>
-</head>
-<body>
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>WP lab - Confirmation Info</title>-->
+<!--    <style type="text/css">-->
+<!--        body {-->
+<!--            width: 800px;-->
+<!--            margin: auto;-->
+<!--        }-->
+<!--        table {-->
+<!--            width:100%;-->
+<!--        }-->
+<!--        table, td, th {-->
+<!--            border: 1px solid black;-->
+<!--            padding: 3px 2px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
 <section>
     <header>
         <h1>Balloon Order page - Order confirmation </h1>
@@ -29,7 +29,8 @@
         </tr>
         <tr>
             <td><b>Client Name </b></td>
-            <td th:text="${session.user.username}"></td> <!--Petko Petkov -->
+<!--            <td th:text="${session.user.username}"></td>-->
+            <td th:text="${#request.getRemoteUser()}"></td> <!--Petko Petkov -->
         </tr>
         <tr>
             <!--<td><b>Client Address </b></td>
@@ -37,11 +38,13 @@
         </tr>
         <tr>
             <td><b>Client IP Address</b></td>
-            <td th:text="${ipAddress}"></td> <!-- 127.0.0.1-->
+<!--            <td th:text="${ipAddress}"></td> &lt;!&ndash; 127.0.0.1&ndash;&gt;-->
+            <td th:text="${#request.getRemoteAddr()}"></td>
         </tr>
         <tr>
             <td><b>Client Browser</b></td>
-            <td th:text="${clientAgent}"></td> <!--Mozilla -->
+<!--            <td th:text="${clientAgent}"></td> &lt;!&ndash;Mozilla &ndash;&gt;-->
+            <td th:text="${#request.getHeader('User-Agent')}"></td>
         </tr>
         <tr>
             <td><b>Balloon Color </b></td>
@@ -75,5 +78,5 @@
     </form>
 
 </section>
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

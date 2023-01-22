@@ -84,4 +84,11 @@ public class OrderServiceClass implements OrderService {
 //        return (Optional<Order>) Optional.of(order);
 //    }
 
+    @Override
+    public Order getActiveOrder(String username){
+        User user=this.userRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException(username));
+        return this.orderRepository.findByUser(user).orElseGet(()->{Order order=new Order(user);
+        return this.orderRepository.save(order);});
+    }
+
 }

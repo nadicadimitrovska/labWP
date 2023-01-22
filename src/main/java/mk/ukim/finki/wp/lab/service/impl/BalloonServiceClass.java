@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Balloon;
 import mk.ukim.finki.wp.lab.model.Manufacturer;
+import mk.ukim.finki.wp.lab.model.exceptions.BalloonNotFoundException;
 import mk.ukim.finki.wp.lab.model.exceptions.ManufacturerNotFoundException;
 import mk.ukim.finki.wp.lab.repository.jpa.BalloonRepositoryDB;
 import mk.ukim.finki.wp.lab.repository.jpa.ManufacturerRepositoryDB;
@@ -59,6 +60,21 @@ public class BalloonServiceClass implements BalloonService {
     public Optional<Balloon> save(String name, String description, Long manufacturerId) {
         Manufacturer manufacturer=this.manufacturerRepository.findById(manufacturerId).orElseThrow(()->new ManufacturerNotFoundException(manufacturerId));
         return Optional.of( this.balloonRepository.save(new Balloon(name,description,manufacturer)));
+    }
+
+    @Override
+    public Optional<Balloon> edit(Long id,String name, String description, Long manufacturerId) {
+        Balloon balloon= this.balloonRepository.findById(id).orElseThrow(() -> new BalloonNotFoundException(id));
+
+        Manufacturer manufacturer=this.manufacturerRepository.findById(manufacturerId).orElseThrow(()->new ManufacturerNotFoundException(manufacturerId));
+
+        balloon.setName(name);
+        balloon.setDescription(description);
+        balloon.setManufacturer(manufacturer);
+
+        return Optional.of( this.balloonRepository.save(balloon));
+
+//        return Optional.of( this.balloonRepository.save(new Balloon(name,description,manufacturer)));
     }
 
 

@@ -31,23 +31,23 @@ public class AuthServiceClass implements AuthService {
 
 
 
-    @Override
-        public User register(String username, String password, String repeatPassword, UserFullname userFullname,LocalDate dateOfBirth) {
-            if (username==null || username.isEmpty() || password==null || password.isEmpty()){
-                throw new InvalidArgumentException();
-            }
-            if (!password.equals(repeatPassword)){
-                throw new PasswordsDoNotMatchException();
-            }
-            if (this.userRepository.findByUsername(username).isPresent()
-                    || !this.userRepository.findByUsername(username).isEmpty())
-                throw new UsernameAlreadyExistsException(username);
-
-//            User user=new User(username,name, surname, password,dateOfBirth);
-            User user=new User(username,userFullname, password,dateOfBirth);
-            return userRepository.save(user);
-
-        }
+//    @Override
+//        public User register(String username, String password, String repeatPassword, UserFullname userFullname,LocalDate dateOfBirth) {
+//            if (username==null || username.isEmpty() || password==null || password.isEmpty()){
+//                throw new InvalidArgumentException();
+//            }
+//            if (!password.equals(repeatPassword)){
+//                throw new PasswordsDoNotMatchException();
+//            }
+//            if (this.userRepository.findByUsername(username).isPresent()
+//                    || !this.userRepository.findByUsername(username).isEmpty())
+//                throw new UsernameAlreadyExistsException(username);
+//
+////            User user=new User(username,name, surname, password,dateOfBirth);
+//            User user=new User(username,userFullname, password,dateOfBirth);
+//            return userRepository.save(user);
+//
+//        }
 }
 
 

@@ -1,10 +1,10 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
 import mk.ukim.finki.wp.lab.model.Order;
-import mk.ukim.finki.wp.lab.model.ShoppingCart;
 import mk.ukim.finki.wp.lab.model.User;
 import mk.ukim.finki.wp.lab.service.OrderService;
 //import mk.ukim.finki.wp.lab.service.ShoppingCartService;
+import mk.ukim.finki.wp.lab.service.UserService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +22,10 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
     //private final ShoppingCartService shoppingCartService;
-    public OrderController(OrderService orderService) {
+    private final UserService userService; //dodadeno vo lab4
+    public OrderController(OrderService orderService, UserService userService) {
         this.orderService = orderService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -45,7 +47,9 @@ public class OrderController {
             orders = this.orderService.listAll();
         }
         model.addAttribute("orders", orders);
-        return "userOrders";
+        model.addAttribute("bodyContent","userOrders");
+        return "master-template";
+        //return "userOrders";
     }
 
     //    @PostMapping("/usersOnly")
@@ -64,15 +68,22 @@ public class OrderController {
     public String placeOrder(@RequestParam
                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                              LocalDateTime dateCreated,
-                             HttpServletRequest request) {
+                             HttpServletRequest request, Model model) {
         String name = (String) request.getSession().getAttribute("color");
         String description = (String) request.getSession().getAttribute("size");
 
-        User user = (User) request.getSession().getAttribute("user");
+        //User user = (User) request.getSession().getAttribute("user"); //ne mozhe ova vaka vo lab3 rab
+        String username=request.getRemoteUser();
+//        Order order=this.orderService.getActiveOrder(username);
 //        Order order = this.orderService.placeOrder(name, description, user.getUsername(), dateCreated);
-        Order order = this.orderService.placeOrder(name, description, user.getUsername(), dateCreated);
+        Order order = this.orderService.placeOrder(name, description, username, dateCreated);
         //this.shoppingCartService.addOrderToShoppingCart(user.getUsername(), order.getOrderId());
-        return "redirect:/ConfirmationInfo";
+        //return "redirect:/ConfirmationInfo";
+        model.addAttribute("bodyContent","confirmationInfo");
+        return "master-template";
+//        return "confirmationInfo";
 
     }
+
+
 }

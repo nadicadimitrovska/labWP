@@ -1,24 +1,24 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <title>Order</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>Order</title>-->
+<!--    <style type="text/css">-->
+<!--        body {-->
+<!--            width: 800px;-->
+<!--            margin: auto;-->
+<!--        }-->
 
-        table {
-            width: 100%;
-        }
+<!--        table {-->
+<!--            width: 100%;-->
+<!--        }-->
 
-        table, td, th {
-            border: 1px solid black;
-            padding: 3px 2px;
-        }
-    </style>
-</head>
-<body>
+<!--        table, td, th {-->
+<!--            border: 1px solid black;-->
+<!--            padding: 3px 2px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
 <!--
 <table class="wp-table">
     <tr>
@@ -53,7 +53,7 @@
 </div> -->
 
 <p>
-<h1 th:text="${session.user.getUserFullname().getName()}"></h1>
+<h1 th:text="${#request.getRemoteUser()}"></h1>
 </p>
 <table class="table table-striped">
     <thead>
@@ -65,7 +65,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="order : ${orders}">
+    <tr th:each="order : ${orders}" class="cart-order">
+<!--        <input type="hidden" id="id" name="id" th:value="(${order} !=null ? ${order.getId()} : '')"> &lt;!&ndash;promena vo lab4 selenium&ndash;&gt;-->
         <td th:text="${order.getBalloonColor()}"></td>
         <td th:text="${order.getBalloonSize()}"></td>
         <td th:text="${order.getDateCreated()}"></td>
@@ -81,5 +82,5 @@
     <input type="submit" value="Submit"/>
 </form>
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

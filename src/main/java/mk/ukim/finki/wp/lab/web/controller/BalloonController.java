@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/balloons")
+//@RequestMapping("/balloons")
+@RequestMapping(value ={"/","/balloons"})
 //localhost:9091/balloons
 public class BalloonController {
 
@@ -36,14 +37,20 @@ public class BalloonController {
         }
         List<Balloon>balloons=this.balloonService.listAll();
         model.addAttribute("balloons", balloons);
-        return "listBalloons";
+        model.addAttribute("bodyContent","listBalloons");
+        return "master-template";
+//        return "listBalloons";
     }
 
     @PostMapping("/save")
-    public String saveBalloonColor(HttpServletRequest req){
+    public String saveBalloonColor(HttpServletRequest req,Model model){
         String color=req.getParameter("color");
         req.getSession().setAttribute("color",color);
-        return "redirect:/selectBalloon";
+//        return "redirect:/selectBalloon";
+        model.addAttribute("bodyContent"," selectBalloonSize");
+        return "master-template";
+        //return " selectBalloonSize";
+
     }
 
     //@PostMapping("/add-form")
@@ -79,16 +86,33 @@ public class BalloonController {
     }
 
     @PostMapping("/add")
-    public String saveBalloon(@RequestParam String color, @RequestParam String desc, @RequestParam Long manufacturer){
-        this.balloonService.save(color,desc,manufacturer);
+    public String saveBalloon(@RequestParam(required = false) Long id,@RequestParam String color, @RequestParam String desc, @RequestParam Long manufacturer){
+        //this.balloonService.save(color,desc,manufacturer);
+        if (id!=null){
+            this.balloonService.edit(id, color, desc, manufacturer);
+        }else {
+            this.balloonService.save(color,desc,manufacturer);
+        }
+
         return "redirect:/balloons";
     }
-    @GetMapping("/orders")
-    public String order(){
-//        List<Order>orders=this.orderService.listAll();
-//        model.addAttribute("orders",orders);
-//        return "userOrders";
-        return "redirect:/userOrders";
+//    @GetMapping("/orders")
+//    public String order(Model model){
+////        List<Order>orders=this.orderService.listAll();
+////        model.addAttribute("orders",orders);
+////        return "userOrders";
+//        model.addAttribute("bodyContent","userOrders");
+////        return "redirect:/userOrders";
+//        return "master-template";
+//    }
+
+    @PostMapping("/save/size")
+    public String saveSize(HttpServletRequest request,Model model){
+        String size=request.getParameter("size");
+        request.getSession().setAttribute("size",size);
+        model.addAttribute("bodyContent","deliveryInfo");
+        return "master-template";
+//        return "deliveryInfo";
     }
 
 }
